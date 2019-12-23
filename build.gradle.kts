@@ -1,5 +1,6 @@
 plugins {
     `java-library`
+    `maven-publish`
     id("com.github.johnrengelman.shadow") version "5.2.0"
 }
 
@@ -25,6 +26,7 @@ allprojects {
 subprojects {
 
     apply(plugin = "java-library")
+    apply(plugin = "maven-publish")
     apply(plugin = "com.github.johnrengelman.shadow")
 
     tasks {
@@ -35,6 +37,24 @@ subprojects {
 
         build {
             finalizedBy(shadowJar)
+        }
+    }
+
+    publishing {
+
+        publications {
+
+            create<MavenPublication>("maven") {
+                project.shadow.component(this)
+            }
+        }
+
+        repositories {
+
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/exactpro/unsplit")
+            }
         }
     }
 }

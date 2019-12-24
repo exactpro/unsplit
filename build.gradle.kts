@@ -52,8 +52,19 @@ subprojects {
         repositories {
 
             maven {
+
                 name = "GitHubPackages"
                 url = uri("https://maven.pkg.github.com/exactpro/unsplit")
+
+                authentication {
+                    create<HttpHeaderAuthentication>("aouth") {
+                    }
+                }
+
+                credentials(HttpHeaderCredentials::class.java) {
+                    name = "Authorization"
+                    value = "Bearer ${ System.getProperty("token") }"
+                }
             }
         }
     }

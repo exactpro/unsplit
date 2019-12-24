@@ -55,4 +55,14 @@ tasks {
             )
         }
     }
+
+    publishing {
+
+        publications {
+
+            getByName<MavenPublication>("maven") {
+                artifactId = "${project.name}_${scalaVersion}"
+            }
+        }
+    }
 }

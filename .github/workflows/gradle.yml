@@ -2,6 +2,10 @@ name: Java CI
 
 on: [push]
 
+env:
+  REGISTRY: "https://maven.pkg.github.com/exactpro"
+  REPOSITORY: "release::default::https://maven.pkg.github.com/exactpro"
+
 jobs:
   build:
 
@@ -14,4 +18,4 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Gradle
-      run: ./gradlew clean build
+      run: ./gradlew --stacktrace -Dtoken=${{ secrets.GITHUB_TOKEN }} clean build publish

@@ -15,4 +15,4 @@ jobs:
     - uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - run: ./gradlew --stacktrace -Dtoken=${{ secrets.GITHUB_TOKEN }} clean build publish
+    - run: ./gradlew --stacktrace -Dbintray_username=${{ secrets.BINTRAY_USERNAME }} -Dbintray_apikey=${{ secrets.BINTRAY_APIKEY }} -Dgithub_token=${{ secrets.GITHUB_TOKEN }} clean build publish

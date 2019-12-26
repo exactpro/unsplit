@@ -53,17 +53,28 @@ subprojects {
 
             maven {
 
+                name = "Bintray"
+                url = uri("https://api.bintray.com/maven/exactpro/unsplit/${project.name}/;publish=1")
+
+                credentials {
+                    username = System.getProperty("bintray_username")
+                    password = System.getProperty("bintray_apikey")
+                }
+            }
+
+            maven {
+
                 name = "GitHubPackages"
                 url = uri("https://maven.pkg.github.com/exactpro/unsplit")
 
                 authentication {
-                    create<HttpHeaderAuthentication>("aouth") {
+                    create<HttpHeaderAuthentication>("oauth") {
                     }
                 }
 
                 credentials(HttpHeaderCredentials::class.java) {
                     name = "Authorization"
-                    value = "Bearer ${ System.getProperty("token") }"
+                    value = "Bearer ${ System.getProperty("github_token") }"
                 }
             }
         }

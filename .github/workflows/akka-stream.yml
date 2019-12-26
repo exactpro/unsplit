@@ -1,9 +1,11 @@
-name: Master
+name: akka-stream
 
 on:
   push:
     branches:
       - master
+    paths:
+      - 'akka-stream/**'
 
 jobs:
   build:
